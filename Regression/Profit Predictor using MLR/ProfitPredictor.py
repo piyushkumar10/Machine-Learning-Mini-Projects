@@ -12,10 +12,12 @@ y = dataset.iloc[:, 4].values
 
 # Encoding categorical data
 from sklearn.preprocessing import LabelEncoder, OneHotEncoder
+
 labelencoder = LabelEncoder()
 X[:, 3] = labelencoder.fit_transform(X[:, 3])
 from sklearn.compose import ColumnTransformer
-ct = ColumnTransformer([("Geography", OneHotEncoder(), [3])], remainder = 'passthrough')
+
+ct = ColumnTransformer([("Geography", OneHotEncoder(), [3])], remainder='passthrough')
 X = ct.fit_transform(X)
 
 # Avoiding the Dummy Variable Trap
@@ -23,11 +25,12 @@ X = X[:, 1:]
 
 # Splitting the dataset into the Training set and Test set
 from sklearn.model_selection import train_test_split
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.1, random_state = 0)
 
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.1, random_state=0)
 
 # Fitting Multiple Linear Regression to the Training set
 from sklearn.linear_model import LinearRegression
+
 regressor = LinearRegression()
 regressor.fit(X_train, y_train)
 
